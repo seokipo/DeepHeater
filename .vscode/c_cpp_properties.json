@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "name": "XC8-PIC16F18855",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "D:/Program files/Microchip/xc8/v2.45/pic/include"
+            ],
+            "defines": [
+                "_16F18855",
+                "__PICC__",
+                "__XC8",
+                "__XC8__",
+                "__pic16",
+                "__bit=char",
+                "__pack=",
+                "__persistent=",
+                "__bank0=",
+                "__bank1=",
+                "__bank2=",
+                "__bank3=",
+                "__eeprom="
+            ],
+            "compilerPath": "D:/Program files/Microchip/xc8/v2.45/bin/xc8-cc.exe",
+            "cStandard": "c99",
+            "intelliSenseMode": "windows-gcc-x64",
+            "forcedInclude": [
+                "D:/Program files/Microchip/xc8/v2.45/pic/include/proc/pic16f18855.h"
+            ]
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,1 @@
+{"nodes": [{"id": "development_log_md", "label": "\uac1c\ubc1c \uc77c\uc9c0 (DEVELOPMENT_LOG.md)", "file_type": "document", "source_file": "DEVELOPMENT_LOG.md"}], "edges": [{"source": "development_log_md", "target": "main_c", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "DEVELOPMENT_LOG.md"}], "hyperedges": []}

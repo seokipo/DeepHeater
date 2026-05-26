@@ -1,0 +1,1 @@
+{"nodes": [{"id": "dependency_map_md", "label": "\uc758\uc874\uc131 \uc9c0\ub3c4 (dependency_map.md)", "file_type": "document", "source_file": "dependency_map.md"}], "edges": [{"source": "dependency_map_md", "target": "main_c", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "dependency_map.md"}], "hyperedges": []}

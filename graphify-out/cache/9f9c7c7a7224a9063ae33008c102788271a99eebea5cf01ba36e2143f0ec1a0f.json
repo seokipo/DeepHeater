@@ -1,0 +1,1 @@
+{"nodes": [{"id": "graph_report_md", "label": "\ubd84\uc11d \ubcf4\uace0\uc11c (GRAPH_REPORT.md)", "file_type": "document", "source_file": "graph_report.md"}], "edges": [{"source": "graph_report_md", "target": "main_c", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "graph_report.md"}], "hyperedges": []}
