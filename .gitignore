@@ -11,6 +11,9 @@
 *.cmd
 *.pre
 *.sdb
+*.obj
+*.cmf
+*.rlf
 *._ext
 funclist.htm
 startup.s
@@ -18,3 +21,4 @@ debug/
 build/
 dist/
 .agents/
+

@@ -1,10 +1,57 @@
-#include <stdio.h>
+// PIC16F18855 Configuration Bit Settings
+// CONFIG1
+#pragma config FEXTOSC =                                                       \
+    OFF // External Oscillator mode selection bits (Oscillator not enabled)
+#pragma config RSTOSC =                                                        \
+    HFINT32 // Power-up default value for COSC bits (HFINTOSC (32MHz))
+#pragma config CLKOUTEN = OFF // Clock Out Enable bit (CLKOUT function is
+                              // disabled; I/O or oscillator function on OSC2)
+#pragma config CSWEN =                                                         \
+    ON // Clock Switch Enable bit (Writing to NOSC and NDIV is allowed)
+#pragma config FCMEN = OFF // Fail-Safe Clock Monitor Enable bit (Fail-Safe
+                           // Clock Monitor is disabled)
+
+// CONFIG2
+#pragma config MCLRE =                                                         \
+    ON // Master Clear Enable bit (MCLR pin is Master Clear function)
+#pragma config PWRTE = OFF   // Power-up Timer Enable bit (PWRT disabled)
+#pragma config LPBOREN = OFF // Low-Power BOR enable bit (ULPBOR disabled)
+#pragma config BOREN = ON    // Brown-out reset enable bits (Brown-out Reset
+                             // Enabled, SBOREN bit is ignored)
+#pragma config BORV = LO     // Brown-out Reset Voltage Selection bit (Brown-out
+                             // Reset Voltage (VBOR) set to low trip point)
+#pragma config ZCD = OFF     // Zero-Cross Detect disable bit (Zero-Cross Detect
+                             // circuit is disabled at POR)
+#pragma config PPS1WAY = OFF // Peripheral Pin Select one-way control (OFF)
+#pragma config STVREN = ON   // Stack Overflow/Underflow Reset Enable bit (Stack
+                             // Overflow or Underflow will cause a Reset)
+
+// CONFIG3
+#pragma config WDTCPS = WDTCPS_31 // WDT Period Select bits (Divider ratio
+                                  // 1:65536; software control of WDTPS)
+#pragma config WDTE =                                                          \
+    OFF // WDT operating mode (WDT Disabled, SWDTEN is ignored)
+#pragma config WDTCWS =                                                        \
+    WDTCWS_7 // WDT Window Select bits (window always open (100%); software
+             // control; keyed access not required)
+#pragma config WDTCCS = SC // WDT input clock selector (Software Control)
+
+// CONFIG4
+#pragma config LVP = ON // Low Voltage Programming Enable bit (Low Voltage
+                        // programming enabled. MCLR/VPP pin function is MCLR.
+                        // Mode-select register bit LVP is locked on.)
+
+// CONFIG5
+#pragma config CP = OFF // UserNVM Program memory code protection bit (UserNVM
+                        // code protection disabled)
+
 #include "main.h"
-#include "system.h"
 #include "display.h"
 #include "key.h"
 #include "pwm_control.h"
 #include "remote.h"
+#include "system.h"
+#include <stdio.h>
 
 // 시스템 전역 변수 정의
 volatile unsigned char setting_mode = 0;
@@ -12,6 +59,8 @@ volatile unsigned char is_running = 0;
 volatile unsigned char current_level = 1;
 volatile unsigned char is_hi_mode = 0;
 volatile unsigned char pwm_setting_value = 45;
+volatile unsigned char uv_blink_flag = 0;
+unsigned int startup_delay_ms = 0;
 
 /**
  * @brief 전역 비동기 인터럽트 서비스 루틴 (ISR)
@@ -104,12 +153,12 @@ void main(void) {
 
   // EEPROM에 저장된 이전 PWM 설정 로딩 및 복구
   pwm_setting_value = eeprom_read(0x00);
-  if (pwm_setting_value < 20 || pwm_setting_value > 65) {
+  if (pwm_setting_value < 15 || pwm_setting_value > 55) {
     pwm_setting_value = 45;
   }
 
-  // 타이머 및 시간 흐름 연동 변수 선언
-  unsigned char minute = 29;
+  // 타이머 및 시간 흐름 연동 변수 선언 (부팅 시 30분 기본값)
+  unsigned char minute = 30;
   char second = 0;
   unsigned int tick_ms = 0;
 
@@ -117,7 +166,7 @@ void main(void) {
   TRISCbits.TRISC7 = 0;
   LATCbits.LATC7 = 0;
   TRISB = 0x3F;
-  __delay_us(10);
+  __delay_ms(50);
   if ((PORTB & 0x03) == 0x00) {
     setting_mode = 1;
     printf("Entering Setting Mode...\r\n");
@@ -133,6 +182,15 @@ void main(void) {
     buzzer_stage = 1;
     buzzer_timer = 200;
     buzzer_init_value = 200;
+
+    // [중요] 사용자가 SW1, SW2 설정 진입 버튼에서 완전히 손을 떼기 전까지 대기 (Key Release Guard)
+    // 두 버튼이 모두 떨어지면 PORTB & 0x03 의 값이 0x03 (HIGH)이 됨
+    while ((PORTB & 0x03) != 0x03) {
+      TRISCbits.TRISC7 = 0;
+      LATCbits.LATC7 = 0;
+      TRISB = 0x3F;
+      __delay_ms(10);
+    }
   }
   TRISB = 0x00;
   LATCbits.LATC7 = 1;
@@ -149,17 +207,17 @@ void main(void) {
 
       if (debug_cmd == 'H' || debug_cmd == 'h') {
         debug_toggle_mode = 0;
-        RC0PPS = 0x00;         // 일반 GPIO 전환
-        ODCONCbits.ODCC0 = 0;  // Push-pull 활성화
+        RC0PPS = 0x00;        // 일반 GPIO 전환
+        ODCONCbits.ODCC0 = 0; // Push-pull 활성화
         SLRCONCbits.SLRC0 = 0;
-        LATCbits.LATC0 = 1;    // 5V 강제 출력
+        LATCbits.LATC0 = 1; // 5V 강제 출력
         printf("Buzzer (RC0) -> HIGH (5V)\r\n");
       } else if (debug_cmd == 'L' || debug_cmd == 'l') {
         debug_toggle_mode = 0;
         RC0PPS = 0x00;
         ODCONCbits.ODCC0 = 0;
         SLRCONCbits.SLRC0 = 0;
-        LATCbits.LATC0 = 0;    // 0V 강제 출력
+        LATCbits.LATC0 = 0; // 0V 강제 출력
         printf("Buzzer (RC0) -> LOW (0V)\r\n");
       } else if (debug_cmd == 'T' || debug_cmd == 't') {
         debug_toggle_mode = !debug_toggle_mode;
@@ -186,9 +244,11 @@ void main(void) {
       } else if (debug_cmd == 'R' || debug_cmd == 'r') {
         printf("=== REG DUMP ===\r\n");
         printf("LATC=%02X TRISC=%02X RC0PPS=%02X\r\n", LATC, TRISC, RC0PPS);
-        printf("CCP1CON=%02X T2CON=%02X PR2=%u CCPR1L=%u\r\n", CCP1CON, T2CON, PR2, CCPR1L);
-        printf("is_running=%u setting_mode=%u debug_toggle=%u\r\n", is_running, setting_mode, debug_toggle_mode);
-        printf("FOOT_SEN (AN0) ADC: %u\r\n", ADC_Read(0));
+        printf("CCP1CON=%02X T2CON=%02X PR2=%u CCPR1L=%u\r\n", CCP1CON, T2CON,
+               PR2, CCPR1L);
+        printf("is_running=%u setting_mode=%u debug_toggle=%u\r\n", is_running,
+               setting_mode, debug_toggle_mode);
+        printf("FOOT_SEN (ANC2) ADC: %u\r\n", ADC_Read(0x12));
       } else if (debug_cmd == 'S' || debug_cmd == 's') {
         debug_toggle_mode = 0;
         RC0PPS = 0x00;
@@ -201,13 +261,46 @@ void main(void) {
       }
     }
 
-    // UV LED 동작 상태 연동 스위칭
-    LATA5 = is_running ? 0 : 1;
+    // UV LED 동작 상태 연동 스위칭 및 1.2V 임계값 점멸 조건 처리
+    if (!is_running) {
+      LATA5 = 1; // 소등 (Active LOW)
+    } else {
+      if (startup_delay_ms < 1000) {
+        LATA5 = 0; // 시작 후 1초간은 무조건 정상 점등
+      } else {
+        // 1.2V 전압 환산 ADC값: 1.2V / 5.0V * 1023 = 245.52 -> 246 이상일 때 정상 점등
+        if (last_foot_adc_val >= 246) {
+          LATA5 = 0; // 1.2V 이상 시 상시 점등
+        } else {
+          LATA5 = uv_blink_flag ? 0 : 1; // 1.2V 미만 시 500ms 간격 점멸
+        }
+      }
+    }
 
     // --- 3단계 FND 및 LED 디스플레이 동적 스캔 구동 ---
     Display_Process(setting_mode ? pwm_setting_value : minute);
 
     if (!setting_mode) {
+      // 스타트 후 경과 밀리초 계측 (넌블로킹 - 2초 포화 가드 추가)
+      if (is_running) {
+        if (startup_delay_ms < 2000) {
+          startup_delay_ms += 3;
+        }
+      } else {
+        startup_delay_ms = 0;
+      }
+
+      // --- 백그라운드 0.5초 피드백 제어 타이머 연동 ---
+      static unsigned int feedback_tick_ms = 0;
+      feedback_tick_ms += 3;
+      if (feedback_tick_ms >= 500) {
+        feedback_tick_ms -= 500;
+        uv_blink_flag = !uv_blink_flag; // 500ms 마다 점멸 플래그 토글
+        if (is_running) {
+          Heater_Feedback_Process();
+        }
+      }
+
       // --- 백그라운드 1초 타이머 연동 (다운 카운트) ---
       tick_ms += 3; // 1스캔 주기(약 3.2ms)마다 3ms 누적
       if (tick_ms >= 1000) {
@@ -231,9 +324,10 @@ void main(void) {
             }
           }
 
-          // 시간 완료 시 정지 및 완료음 비블로킹 기동
+          // 시간 완료 시 정지 및 완료음 비블로킹 기동 후 30분 기본값 원복
           if (minute == 0 && second == 0) {
             is_running = 0;
+            minute = 30;
             second = 0;
             Update_Heater_PWM();
 
@@ -246,24 +340,24 @@ void main(void) {
             buzzer_stage = 1;
             buzzer_timer = 450;
             buzzer_init_value = 450;
-          } else {
-            // 히터 출력 강도에 따른 풋 센서 AD 피드백 연동 계산 처리 (서브 모듈 위임)
-            Heater_Feedback_Process();
           }
         }
       }
-
-      // --- 키 입력 매트릭스 디바운스 및 상태 갱신 처리 ---
-      Key_Process(&minute, &second, &tick_ms);
-
-      // --- 리모콘 적외선 커맨드 해석 및 실행 처리 ---
-      IR_Process_Command(&minute, &second, &tick_ms);
-
-      // --- 비동기 부저 타이머 스케줄러 처리 ---
-      Buzzer_Process();
-
-      // 히터 PWM 동적 잠금 갱신
-      Update_Heater_PWM();
     }
+
+    // --- 키 입력 매트릭스 디바운스 및 상태 갱신 처리 ---
+    Key_Process(&minute, &second, &tick_ms);
+
+    // --- 리모콘 적외선 커맨드 해석 및 실행 처리 ---
+    IR_Process_Command(&minute, &second, &tick_ms);
+
+    // --- 비동기 부저 타이머 스케줄러 처리 ---
+    Buzzer_Process();
+
+    // 히터 PWM 동적 잠금 갱신
+    Update_Heater_PWM();
+
+    // 팬(FAN) 출력 제어 및 소프트웨어 PWM 타임 슬라이싱 처리
+    Fan_Control_Process();
   }
 }

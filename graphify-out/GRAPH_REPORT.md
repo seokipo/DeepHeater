@@ -1,90 +1,87 @@
-# Graph Report - .  (2026-05-22)
+# Graph Report - d:\\Work\\Pic\\Model\\DeepHeater  (2026-05-26)
 
 ## Corpus Check
-- Corpus is ~32,216 words - fits in a single context window. You may not need a graph.
+- 30 files · ~231,301 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 22 nodes · 32 edges · 5 communities detected
-- Extraction: 59% EXTRACTED · 41% INFERRED · 0% AMBIGUOUS · INFERRED: 13 edges (avg confidence: 0.9)
+- 36 nodes · 41 edges · 5 communities detected
+- Extraction: 61% EXTRACTED · 39% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_코어 펌웨어 및 프로젝트 문서 (Core Firmware & Docs)|코어 펌웨어 및 프로젝트 문서 (Core Firmware & Docs)]]
-- [[_COMMUNITY_MCU 하드웨어 초기화 및 메인 구동 (MCU Hardware Init & Main)|MCU 하드웨어 초기화 및 메인 구동 (MCU Hardware Init & Main)]]
-- [[_COMMUNITY_그래피파이 시스템 분석 가이드 (Graphify Analysis Guide)|그래피파이 시스템 분석 가이드 (Graphify Analysis Guide)]]
-- [[_COMMUNITY_FND 디스플레이 회로 및 스펙 (FND Display Hardware & Spec)|FND 디스플레이 회로 및 스펙 (FND Display Hardware & Spec)]]
-- [[_COMMUNITY_MCU 하드웨어 초기화 및 메인 구동 (MCU Hardware Init & Main)|MCU 하드웨어 초기화 및 메인 구동 (MCU Hardware Init & Main)]]
+- [[_COMMUNITY_Main Control & PWM Actuators|Main Control & PWM Actuators]]
+- [[_COMMUNITY_Interrupts & IR Decoder Module|Interrupts & IR Decoder Module]]
+- [[_COMMUNITY_System Initialization & UART|System Initialization & UART]]
+- [[_COMMUNITY_Key Matrix Scanner Module|Key Matrix Scanner Module]]
+- [[_COMMUNITY_Dynamic Display Multiplexer|Dynamic Display Multiplexer]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `main()` - 7 edges
-2. `System_Init()` - 4 edges
-3. `Buzzer_PWM_Init()` - 4 edges
-4. `IR_Init()` - 4 edges
-5. `__interrupt()` - 4 edges
-6. `MCU 데이터시트 (pic16f18855.pdf)` - 4 edges
-7. `UART_Init()` - 3 edges
-8. `Key_Scan()` - 3 edges
-9. `개발 일지 (DEVELOPMENT_LOG.md)` - 2 edges
-10. `분석 보고서 (GRAPH_REPORT.md)` - 2 edges
+1. `main()` - 13 edges
+2. `Update_Heater_PWM()` - 6 edges
+3. `Key_Process()` - 4 edges
+4. `Heater_Feedback_Process()` - 3 edges
+5. `IR_Process_Command()` - 3 edges
+6. `System_Init()` - 3 edges
+7. `ADC_Read()` - 3 edges
+8. `Display_Process()` - 2 edges
+9. `Key_Scan()` - 2 edges
+10. `__interrupt()` - 2 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `main()` --conceptually_related_to--> `디스플레이 회로도 (Display_part.png)`  [INFERRED]
-  D:\Work\Pic\Model\DeepHeater\main.c → Docs/Display_part.png
-- `System_Init()` --conceptually_related_to--> `MCU 데이터시트 (pic16f18855.pdf)`  [INFERRED]
-  D:\Work\Pic\Model\DeepHeater\main.c → Docs/pic16f18855.pdf
-- `System_Init()` --conceptually_related_to--> `MCU 회로도 (회로도-mcu.png)`  [INFERRED]
-  D:\Work\Pic\Model\DeepHeater\main.c → Docs/회로도-mcu.png
-- `Buzzer_PWM_Init()` --conceptually_related_to--> `MCU 데이터시트 (pic16f18855.pdf)`  [INFERRED]
-  D:\Work\Pic\Model\DeepHeater\main.c → Docs/pic16f18855.pdf
-- `Buzzer_PWM_Init()` --conceptually_related_to--> `부저 및 IR 회로도 (ir_buzz_pwm.png)`  [INFERRED]
-  D:\Work\Pic\Model\DeepHeater\main.c → Docs/ir_buzz_pwm.png
+- `main()` --calls--> `Display_Process()`  [INFERRED]
+  D:\Work\Pic\Model\DeepHeater\main.c → D:\Work\Pic\Model\DeepHeater\display.c
+- `main()` --calls--> `UART_Init()`  [INFERRED]
+  D:\Work\Pic\Model\DeepHeater\main.c → D:\Work\Pic\Model\DeepHeater\system.c
+- `main()` --calls--> `IR_Init()`  [INFERRED]
+  D:\Work\Pic\Model\DeepHeater\main.c → D:\Work\Pic\Model\DeepHeater\remote.c
+- `Key_Process()` --calls--> `Update_Heater_PWM()`  [INFERRED]
+  D:\Work\Pic\Model\DeepHeater\key.c → D:\Work\Pic\Model\DeepHeater\pwm_control.c
+- `main()` --calls--> `Key_Process()`  [INFERRED]
+  D:\Work\Pic\Model\DeepHeater\main.c → D:\Work\Pic\Model\DeepHeater\key.c
 
 ## Communities
 
-### Community 0 - "코어 펌웨어 및 프로젝트 문서 (Core Firmware & Docs)"
-Cohesion: 0.32
-Nodes (6): 의존성 지도 (dependency_map.md), 개발 일지 (DEVELOPMENT_LOG.md), 카파시 가이드라인 (karpathy_guidelines.md), __interrupt(), 프로그램 용어 사전 (PROGRAMMING_TERMS.md), 리모컨 데이터 포맷 (리모콘데이타.png)
+### Community 0 - "Main Control & PWM Actuators"
+Cohesion: 0.46
+Nodes (7): main(), Buzzer_PWM_Init(), Heater_PWM_Init(), Update_Heater_PWM(), Buzzer_Process(), Heater_Feedback_Process(), ADC_Read()
 
-### Community 1 - "MCU 하드웨어 초기화 및 메인 구동 (MCU Hardware Init & Main)"
-Cohesion: 0.39
-Nodes (8): 부저 및 IR 회로도 (ir_buzz_pwm.png), Buzzer_PWM_Init(), IR_Init(), main(), System_Init(), UART_Init(), MCU 데이터시트 (pic16f18855.pdf), MCU 회로도 (회로도-mcu.png)
+### Community 1 - "Interrupts & IR Decoder Module"
+Cohesion: 0.33
+Nodes (4): __interrupt(), IR_Init(), IR_Decode_Process(), IR_Process_Command()
 
-### Community 2 - "그래피파이 시스템 분석 가이드 (Graphify Analysis Guide)"
+### Community 2 - "System Initialization & UART"
+Cohesion: 0.5
+Nodes (3): System_Init(), ADC_Init(), UART_Init()
+
+### Community 3 - "Key Matrix Scanner Module"
 Cohesion: 1.0
-Nodes (2): 분석 보고서 (GRAPH_REPORT.md), 그래피파이 가이드 (graphify_guide.md)
+Nodes (2): Key_Scan(), Key_Process()
 
-### Community 3 - "FND 디스플레이 회로 및 스펙 (FND Display Hardware & Spec)"
+### Community 6 - "Dynamic Display Multiplexer"
 Cohesion: 1.0
-Nodes (2): FND 스펙 (CLD-5622BUR-11.pdf), 디스플레이 회로도 (Display_part.png)
-
-### Community 4 - "MCU 하드웨어 초기화 및 메인 구동 (MCU Hardware Init & Main)"
-Cohesion: 1.0
-Nodes (2): 키 및 LED 회로도 (Key&led.png), Key_Scan()
+Nodes (1): Display_Process()
 
 ## Knowledge Gaps
-- **7 isolated node(s):** `의존성 지도 (dependency_map.md)`, `그래피파이 가이드 (graphify_guide.md)`, `카파시 가이드라인 (karpathy_guidelines.md)`, `FND 스펙 (CLD-5622BUR-11.pdf)`, `키 및 LED 회로도 (Key&led.png)` (+2 more)
-  These have ≤1 connection - possible missing edges or undocumented components.
-- **Thin community `그래피파이 시스템 분석 가이드 (Graphify Analysis Guide)`** (2 nodes): `분석 보고서 (GRAPH_REPORT.md)`, `그래피파이 가이드 (graphify_guide.md)`
+- **Thin community `Key Matrix Scanner Module`** (3 nodes): `key.c`, `Key_Scan()`, `Key_Process()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `FND 디스플레이 회로 및 스펙 (FND Display Hardware & Spec)`** (2 nodes): `FND 스펙 (CLD-5622BUR-11.pdf)`, `디스플레이 회로도 (Display_part.png)`
-  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `MCU 하드웨어 초기화 및 메인 구동 (MCU Hardware Init & Main)`** (2 nodes): `키 및 LED 회로도 (Key&led.png)`, `Key_Scan()`
+- **Thin community `Dynamic Display Multiplexer`** (2 nodes): `display.c`, `Display_Process()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `main()` connect `MCU 하드웨어 초기화 및 메인 구동 (MCU Hardware Init & Main)` to `코어 펌웨어 및 프로젝트 문서 (Core Firmware & Docs)`, `FND 디스플레이 회로 및 스펙 (FND Display Hardware & Spec)`, `MCU 하드웨어 초기화 및 메인 구동 (MCU Hardware Init & Main)`?**
-  _High betweenness centrality (0.233) - this node is a cross-community bridge._
-- **Why does `System_Init()` connect `MCU 하드웨어 초기화 및 메인 구동 (MCU Hardware Init & Main)` to `코어 펌웨어 및 프로젝트 문서 (Core Firmware & Docs)`?**
-  _High betweenness centrality (0.113) - this node is a cross-community bridge._
-- **Are the 2 inferred relationships involving `System_Init()` (e.g. with `MCU 데이터시트 (pic16f18855.pdf)` and `MCU 회로도 (회로도-mcu.png)`) actually correct?**
-  _`System_Init()` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `Buzzer_PWM_Init()` (e.g. with `MCU 데이터시트 (pic16f18855.pdf)` and `부저 및 IR 회로도 (ir_buzz_pwm.png)`) actually correct?**
-  _`Buzzer_PWM_Init()` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `IR_Init()` (e.g. with `MCU 데이터시트 (pic16f18855.pdf)` and `부저 및 IR 회로도 (ir_buzz_pwm.png)`) actually correct?**
-  _`IR_Init()` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 3 inferred relationships involving `__interrupt()` (e.g. with `리모컨 데이터 포맷 (리모콘데이타.png)` and `프로그램 용어 사전 (PROGRAMMING_TERMS.md)`) actually correct?**
-  _`__interrupt()` has 3 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `의존성 지도 (dependency_map.md)`, `그래피파이 가이드 (graphify_guide.md)`, `카파시 가이드라인 (karpathy_guidelines.md)` to the rest of the system?**
-  _7 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `main()` connect `Main Control & PWM Actuators` to `Interrupts & IR Decoder Module`, `System Initialization & UART`, `Key Matrix Scanner Module`, `Dynamic Display Multiplexer`?**
+  _High betweenness centrality (0.309) - this node is a cross-community bridge._
+- **Why does `Key_Process()` connect `Key Matrix Scanner Module` to `Main Control & PWM Actuators`?**
+  _High betweenness centrality (0.071) - this node is a cross-community bridge._
+- **Why does `System_Init()` connect `System Initialization & UART` to `Main Control & PWM Actuators`?**
+  _High betweenness centrality (0.045) - this node is a cross-community bridge._
+- **Are the 12 inferred relationships involving `main()` (e.g. with `System_Init()` and `Heater_PWM_Init()`) actually correct?**
+  _`main()` has 12 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 4 inferred relationships involving `Update_Heater_PWM()` (e.g. with `Key_Process()` and `main()`) actually correct?**
+  _`Update_Heater_PWM()` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 2 inferred relationships involving `Key_Process()` (e.g. with `Update_Heater_PWM()` and `main()`) actually correct?**
+  _`Key_Process()` has 2 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 2 inferred relationships involving `IR_Process_Command()` (e.g. with `main()` and `Update_Heater_PWM()`) actually correct?**
+  _`IR_Process_Command()` has 2 INFERRED edges - model-reasoned connections that need verification._

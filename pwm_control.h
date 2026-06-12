@@ -12,6 +12,7 @@ extern volatile unsigned int buzzer_timer;
 extern volatile unsigned int buzzer_init_value;
 extern volatile unsigned char buzzer_mode;
 extern volatile unsigned char buzzer_stage;
+extern volatile unsigned int last_foot_adc_val;
 
 // 함수 프로토타입 선언
 void Buzzer_PWM_Init(void);
@@ -19,5 +20,6 @@ void Heater_PWM_Init(void);
 void Update_Heater_PWM(void);
 void Heater_Feedback_Process(void);
 void Buzzer_Process(void);
+void Fan_Control_Process(void);
 
 #endif // PWM_CONTROL_H

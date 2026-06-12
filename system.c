@@ -28,47 +28,47 @@ void System_Init(void) {
   OSCEN = 0x24;
 
   // 2. 아날로그 기능 초기화
-  // RA0/AN0(FOOT_SEN)만 아날로그 채널로 남겨두고 나머지는 모두 디지털 모드로 설정
-  ANSELA = 0x01;
+  // RC2/ANC2(FOOT_SEN)만 아날로그 채널로 남겨두고 나머지는 모두 디지털 모드로 설정 (V0.9.52 회로 스왑)
+  ANSELA = 0x00;
   ANSELB = 0x00;
-  ANSELC = 0x00;
+  ANSELC = 0x04; // bit 2: ANSC2 = 1 (RC2 아날로그 모드)
 
   // 오픈 드레인 오동작 방지 및 드라이브 능력 최대화를 위해 명시적으로 설정
   ODCONC = 0x00;  // Open-Drain 완전 비활성화 (Push-Pull 모드 강제)
   SLRCONC = 0x00; // Slew Rate 제한 해제 (드라이브 강도 최대 확보)
 
   // 3. I/O 방향 설정 (TRIS)
-  // RA0 (FOOT_SEN) - 입력 (1)
+  // RA0 (FAN) - 출력 (0) (V0.9.52 회로 스왑)
   // RA1 (DIGIT 1) - 출력 (0)
   // RA2 (DIGIT 2) - 출력 (0)
   // RA3 (LED DRV) - 출력 (0)
   // RA4 (REMOTE) - 입력 (1)
   // RA5 (LED UV) - 출력 (0)
   // RA6, RA7 - 출력 (0)
-  TRISA = 0x11; // 0b00010001
+  TRISA = 0x10; // 0b00010000 (RA0 출력 설정)
 
   // RB0 ~ RB7 (FND A ~ DP) - FND/LED 캐소드 구동 출력이므로 모두 출력 (0)
   TRISB = 0x00;
 
   // RC0 (BUZZ) - 출력 (0)
   // RC1 (PWM) - 출력 (0)
-  // RC2 (FAN) - 출력 (0)
+  // RC2 (FOOT_SEN) - 입력 (1) (V0.9.52 회로 스왑)
   // RC3, RC4, RC5 - 출력 (0)
   // RC6 (232 TX) - 출력 (0)
   // RC7 (KEY IN) - 키 스캔 제어를 위해 출력 (0)
   // RC0 ~ RC7 - FND 디스플레이 및 스캔 구동용으로 모두 출력 (0)
-  TRISC = 0x00; // 0b00000000
+  TRISC = 0x04; // 0b00000100 (RC2 입력 설정)
 
   // 4. 포트 초기 출력 설정 (LAT)
   // TR 구동 제어 핀(PNP형)은 켜지지 않도록 초기값 HIGH(1)로 설정
   // DIGIT 1(RA1)=1, DIGIT 2(RA2)=1, LED DRV(RA3)=1, LED UV(RA5)=1
+  // FAN(RA0)은 LOW(0)로 시작 (V0.9.52 회로 스왑)
   LATA = 0x2E; // 0b00101110
 
   // FND 및 LED 라인 캐소드를 모두 HIGH(1)로 해두어 완전 꺼짐 상태로 초기화
   LATB = 0xFF;
 
-  // 부저(RC0), PWM(RC1), FAN(RC2) 등 구동 라인은 LOW(0)로 시작
-  // RC7 (KEY IN)은 평상시 HIGH(1) 상태로 유지
+  // 부저(RC0), PWM(RC1) 등 구동 라인은 LOW(0)로 시작, RC7 (KEY IN)은 평상시 HIGH(1) 상태로 유지 (V0.9.52 회로 스왑으로 RC2는 입력이 됨)
   LATC = 0x80; // 0b10000000
 
   // 5. 외부 풀업 저항(R1~R6, R19)이 물리적으로 존재하므로 MCU 내부 풀업 전면 비활성화 (잔상 억제)
@@ -119,6 +119,7 @@ void ADC_Init(void) {
   ADCON2 = 0x00;
   ADCON3 = 0x00;
   ADACT = 0x00;
+  ADACQ = 0x1F;  // 아날로그 입력 샘플링 충전 시간(Acquisition Time)을 31 TAD로 미세 조정해 지연을 단축하면서 감도를 보장
 }
 
 /**

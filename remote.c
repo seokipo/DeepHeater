@@ -127,7 +127,7 @@ void IR_Process_Command(unsigned char *p_minute, char *p_second, unsigned int *p
 
     if (setting_mode) {
       if (cmd == IR_CMD_NUM2) {
-        if (pwm_setting_value < 65) {
+        if (pwm_setting_value < 55) {
           pwm_setting_value++;
           printf("PWM Set: %d\r\n", pwm_setting_value);
           CCP1CON = 0x8F;
@@ -140,7 +140,7 @@ void IR_Process_Command(unsigned char *p_minute, char *p_second, unsigned int *p
           buzzer_init_value = 100;
         }
       } else if (cmd == IR_CMD_NUM1) {
-        if (pwm_setting_value > 20) {
+        if (pwm_setting_value > 15) {
           pwm_setting_value--;
           printf("PWM Set: %d\r\n", pwm_setting_value);
           CCP1CON = 0x8F;
@@ -164,6 +164,7 @@ void IR_Process_Command(unsigned char *p_minute, char *p_second, unsigned int *p
         buzzer_stage = 1;
         buzzer_timer = 80;
         buzzer_init_value = 80;
+        setting_mode = 0; // 설정 완료 시 설정 모드 해제 및 일반 구동 복귀
       }
     } else {
       // 삼중음 진행 중(mode=1, 2)인지 감지

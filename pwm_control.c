@@ -7,7 +7,7 @@ const unsigned int FOOT_ADC_THRES_LO[6] = {310, 465, 620, 713, 775, 806};
 const unsigned int FOOT_ADC_THRES_HI[6] = {403, 651, 775, 837, 868, 868};
 
 // 히터 피드백 제어 관련 내부 정적 변수
-static unsigned int last_foot_adc_val = 0;
+volatile unsigned int last_foot_adc_val = 0;
 static unsigned int feedback_duration_us = 500;
 static unsigned int last_feedback_adc_val = 0;
 
@@ -100,7 +100,7 @@ void Update_Heater_PWM(void) {
 
   if (is_running && !prev_is_running) {
     feedback_duration_us = 500;
-    last_feedback_adc_val = ADC_Read(0);
+    last_feedback_adc_val = ADC_Read(0x12);
   }
   if (!is_running && prev_is_running) {
     feedback_duration_us = 500;
@@ -147,8 +147,13 @@ void Update_Heater_PWM(void) {
     break;
   }
 
-  if (PWM7CONbits.PWM7OUT == 0) {
-    last_foot_adc_val = ADC_Read(0);
+  static unsigned char adc_interval_cnt = 0;
+  if (adc_interval_cnt < 30) {
+    adc_interval_cnt++;
+  }
+  if (adc_interval_cnt >= 30) {
+    last_foot_adc_val = ADC_Read(0x12);
+    adc_interval_cnt = 0;
   }
 
   unsigned int duration_us = feedback_duration_us;
@@ -260,7 +265,7 @@ void Buzzer_Process(void) {
         T2CON = 0x00;
         CCPR1L = 0;
         LATCbits.LATC0 = 0;
-        PR2 = 45;      // 기본 중간음 복원
+        PR2 = 45; // 기본 중간음 복원
       }
     } else {
       // 현재 단일 단계 내에서 비례 감쇄 연산 (감쇄음 효과)
@@ -276,24 +281,42 @@ void Buzzer_Process(void) {
 void Heater_Feedback_Process(void) {
   unsigned int max_duration_us = 0;
   switch (current_level) {
-  case 1: max_duration_us = is_hi_mode ? 750 : 500; break;
-  case 2: max_duration_us = is_hi_mode ? 1500 : 1000; break;
-  case 3: max_duration_us = is_hi_mode ? 2250 : 1500; break;
-  case 4: max_duration_us = is_hi_mode ? 3000 : 2000; break;
-  case 5: max_duration_us = is_hi_mode ? 3750 : 2500; break;
-  case 6: max_duration_us = is_hi_mode ? 4500 : 3000; break;
-  default: max_duration_us = 0; break;
+  case 1:
+    max_duration_us = is_hi_mode ? 750 : 500;
+    break;
+  case 2:
+    max_duration_us = is_hi_mode ? 1500 : 1000;
+    break;
+  case 3:
+    max_duration_us = is_hi_mode ? 2250 : 1500;
+    break;
+  case 4:
+    max_duration_us = is_hi_mode ? 3000 : 2000;
+    break;
+  case 5:
+    max_duration_us = is_hi_mode ? 3750 : 2500;
+    break;
+  case 6:
+    max_duration_us = is_hi_mode ? 4500 : 3000;
+    break;
+  default:
+    max_duration_us = 0;
+    break;
   }
 
   if (max_duration_us > 500) {
     unsigned int cur_adc = last_foot_adc_val;
-    if (cur_adc >= (unsigned int)((unsigned long)last_feedback_adc_val * 12 / 10)) {
-      feedback_duration_us = (unsigned int)((unsigned long)feedback_duration_us * 12 / 10);
+    if (cur_adc >=
+        (unsigned int)((unsigned long)last_feedback_adc_val * 11 / 10)) {
+      feedback_duration_us =
+          (unsigned int)((unsigned long)feedback_duration_us * 13 / 10);
       if (feedback_duration_us > max_duration_us) {
         feedback_duration_us = max_duration_us;
       }
-    } else if (cur_adc < (unsigned int)((unsigned long)last_feedback_adc_val * 8 / 10)) {
-      feedback_duration_us = (unsigned int)((unsigned long)feedback_duration_us * 8 / 10);
+    } else if (cur_adc <
+               (unsigned int)((unsigned long)last_feedback_adc_val * 9 / 10)) {
+      feedback_duration_us =
+          (unsigned int)((unsigned long)feedback_duration_us * 7 / 10);
       if (feedback_duration_us < 500) {
         feedback_duration_us = 500;
       }
@@ -303,5 +326,68 @@ void Heater_Feedback_Process(void) {
     feedback_duration_us = 500;
   }
   Update_Heater_PWM();
+}
+
+/**
+ * @brief 치료 시간 경과에 따른 팬(FAN) 출력 제어 및 소프트웨어 PWM 타임 슬라이싱 처리
+ * - 치료 시작 후 10분 경과 시: 20% 출력
+ * - 치료 시작 후 20분 경과 시: 30% 출력
+ * - 치료 시작 후 25분 경과 시: 50% 출력
+ */
+void Fan_Control_Process(void) {
+  static unsigned int fan_tick_ms = 0;
+  static unsigned int fan_elapsed_seconds = 0;
+  static unsigned char fan_pwm_cnt = 0;
+  static unsigned int one_second_cnt = 0;
+
+  // 1. 치료 중이 아니면 넌블로킹 상태 타이머 변수 리셋 및 팬 즉시 정지
+  if (!is_running) {
+    fan_tick_ms = 0;
+    fan_elapsed_seconds = 0;
+    fan_pwm_cnt = 0;
+    one_second_cnt = 0;
+    FAN_LAT = 0; // 팬 소등
+    return;
+  }
+
+  // 2. 넌블로킹 3ms 단위 틱 누적 및 시간 관리
+  fan_tick_ms += 3;
+  one_second_cnt += 3;
+  if (one_second_cnt >= 1000) {
+    one_second_cnt -= 1000;
+    fan_elapsed_seconds++;
+  }
+
+  // 10ms 주기 소프트웨어 PWM 카운터 갱신
+  if (fan_tick_ms >= 10) {
+    fan_tick_ms -= 10;
+    fan_pwm_cnt++;
+    if (fan_pwm_cnt >= 10) { // 100ms 주기 완성
+      fan_pwm_cnt = 0;
+    }
+  }
+
+  // 3. 경과 시간에 따른 팬 구동 듀티 비율(%) 산정
+  unsigned char duty_percent = 0;
+  if (fan_elapsed_seconds >= 1500) {      // 25분 이상 경과 시
+    duty_percent = 50;
+  } else if (fan_elapsed_seconds >= 1200) { // 20분 이상 경과 시
+    duty_percent = 30;
+  } else if (fan_elapsed_seconds >= 600) {  // 10분 이상 경과 시
+    duty_percent = 20;
+  } else {                                  // 10분 미만 시 (0%)
+    duty_percent = 0;
+  }
+
+  // 4. 소프트웨어 PWM 시분할 제어 매핑
+  if (duty_percent == 0) {
+    FAN_LAT = 0;
+  } else if (duty_percent == 20) {
+    FAN_LAT = (fan_pwm_cnt < 2) ? 1 : 0;
+  } else if (duty_percent == 30) {
+    FAN_LAT = (fan_pwm_cnt < 3) ? 1 : 0;
+  } else if (duty_percent == 50) {
+    FAN_LAT = (fan_pwm_cnt < 5) ? 1 : 0;
+  }
 }
 

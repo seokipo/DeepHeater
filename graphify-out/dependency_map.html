@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>심부발열기 의존성 지도 (Dependency Map)</title>
+    <!-- Dark Mode & Modern CSS Styling -->
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-color: #c9d1d9;
+            --accent-color: #58a6ff;
+            --border-color: #30363d;
+            --header-bg: #1f242c;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #ffffff;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 24px;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .mermaid-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .info-card {
+            background-color: var(--header-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px 20px;
+        }
+        .info-card h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+        .info-card ul {
+            padding-left: 20px;
+            margin: 10px 0 0 0;
+        }
+        .info-card li {
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
+    <!-- Mermaid.js Library Load -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose'
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>심부발열기 모듈 의존성 지도 (Module Dependency Map)</h1>
+        <p>
+            단일 대형 파일 구조에서 역할에 맞는 독립 도메인(모듈러 아키텍처)으로 분리 리팩토링된 심부발열기 프로젝트 파일 간의 연관성 지도입니다. 
+            의존 관계 및 데이터 제어 흐름을 명확하게 확인할 수 있습니다.
+        </p>
+
+        <!-- Dynamic Mermaid Graph rendering -->
+        <div class="mermaid-container">
+            <pre class="mermaid">
+graph TD
+    %% Entry Point & ISR
+    main.c["main.c (진입점 & ISR)"] -->|전역 인터럽트 처리| main_ISR[isr]
+    main_ISR -->|IR 하강 엣지 위임| remote.c["remote.c (리모컨 디코더)"]
+    
+    main.c -->|시스템 전체 초기화| system.c["system.c (시스템 드라이버)"]
+    main.c -->|PWM 기동 및 부저 제어| pwm_control.c["pwm_control.c (히터/부저 제어)"]
+    main.c -->|디스플레이 갱신| display.c["display.c (FND 스캔)"]
+    main.c -->|키 입력 처리| key.c["key.c (키 매트릭스)"]
+    main.c -->|리모컨 비동기 해석| remote.c
+
+    %% System Dependencies
+    system.c -->|UART CLI 출력| stdio_printf[printf]
+    
+    %% Cross-Module Connections
+    key.c -->|상태 제어 및 효과음 트리거| pwm_control.c
+    remote.c -->|원격 명령 및 효과음 트리거| pwm_control.c
+    pwm_control.c -->|센서 입력| system.c
+            </pre>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>1. main.c & system.c</h3>
+                <ul>
+                    <li><strong>인터럽트 격리:</strong> 전역 인터럽트(`__interrupt() isr(void)`)는 PIC 구조 상 `main.c`에만 단일 선언하여 빌드 충돌 방지.</li>
+                    <li><strong>클럭 정밀도:</strong> `HFINTOSC 32MHz` 고정. 주파수 변경 시 보오율 설정 및 `__delay_ms` 주기 영향.</li>
+                    <li><strong>비동기 통신:</strong> TX 인터럽트 방식을 적용하여 `printf` 수행 시 디스플레이 스캔이 멈추는 현상 해결.</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>2. display.c & key.c</h3>
+                <ul>
+                    <li><strong>3단계 동적 멀티플렉싱:</strong> 우측 FND -> 좌측 FND -> LED 슬롯을 1ms씩 분리 제어.</li>
+                    <li><strong>고스트 방지:</strong> 데이터 갱신 시 `LATB = 0xFF`로 세그먼트를 끄고 50us 데드타임 적용.</li>
+                    <li><strong>키 스캔:</strong> 세그먼트 소등 상태인 데드타임 직전 짧은 순간에 `Key_Scan()`을 수행하여 플리커링 제거.</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>3. pwm_control.c & remote.c</h3>
+                <ul>
+                    <li><strong>과열 감시:</strong> `Heater_Feedback_Process()`가 실시간으로 `ADC_Read(0)`로 풋 센서 입력값을 읽어 모니터링.</li>
+                    <li><strong>비동기 효과음:</strong> `Buzzer_Process()`가 디바운스/스캔 멈춤 없이 백그라운드 멜로디 재생.</li>
+                    <li><strong>리모컨 해석:</strong> 하강 엣지 시간 간격(Interval)을 활용하여 NEC 리모컨 신호 비동기 디코딩.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

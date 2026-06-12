@@ -1,0 +1,987 @@
+{
+  "nodes": [
+    {
+      "id": "display_c",
+      "label": "display.c",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\display.c",
+      "source_location": "L1"
+    },
+    {
+      "id": "display_display_process",
+      "label": "Display_Process()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\display.c",
+      "source_location": "L32"
+    },
+    {
+      "id": "display_h",
+      "label": "display.h",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\display.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "key_c",
+      "label": "key.c",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L1"
+    },
+    {
+      "id": "key_key_scan",
+      "label": "Key_Scan()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L18"
+    },
+    {
+      "id": "key_key_process",
+      "label": "Key_Process()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L63"
+    },
+    {
+      "id": "key_h",
+      "label": "key.h",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "main_c",
+      "label": "main.c",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L1"
+    },
+    {
+      "id": "main_interrupt",
+      "label": "__interrupt()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L22"
+    },
+    {
+      "id": "main_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L50"
+    },
+    {
+      "id": "main_h",
+      "label": "main.h",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "pwm_control_c",
+      "label": "pwm_control.c",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L1"
+    },
+    {
+      "id": "pwm_control_buzzer_pwm_init",
+      "label": "Buzzer_PWM_Init()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L25"
+    },
+    {
+      "id": "pwm_control_heater_pwm_init",
+      "label": "Heater_PWM_Init()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L58"
+    },
+    {
+      "id": "pwm_control_update_heater_pwm",
+      "label": "Update_Heater_PWM()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L98"
+    },
+    {
+      "id": "pwm_control_buzzer_process",
+      "label": "Buzzer_Process()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L173"
+    },
+    {
+      "id": "pwm_control_heater_feedback_process",
+      "label": "Heater_Feedback_Process()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L276"
+    },
+    {
+      "id": "pwm_control_h",
+      "label": "pwm_control.h",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "remote_c",
+      "label": "remote.c",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L1"
+    },
+    {
+      "id": "remote_ir_init",
+      "label": "IR_Init()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L19"
+    },
+    {
+      "id": "remote_ir_decode_process",
+      "label": "IR_Decode_Process()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L36"
+    },
+    {
+      "id": "remote_ir_process_command",
+      "label": "IR_Process_Command()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L121"
+    },
+    {
+      "id": "remote_h",
+      "label": "remote.h",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "system_c",
+      "label": "system.c",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L1"
+    },
+    {
+      "id": "system_system_init",
+      "label": "System_Init()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L20"
+    },
+    {
+      "id": "system_adc_init",
+      "label": "ADC_Init()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L115"
+    },
+    {
+      "id": "system_adc_read",
+      "label": "ADC_Read()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L129"
+    },
+    {
+      "id": "system_uart_init",
+      "label": "UART_Init()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L144"
+    },
+    {
+      "id": "system_putch",
+      "label": "putch()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L158"
+    },
+    {
+      "id": "system_h",
+      "label": "system.h",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "test_reg_c",
+      "label": "test_reg.c",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\test_reg.c",
+      "source_location": "L1"
+    },
+    {
+      "id": "test_reg_test",
+      "label": "test()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\test_reg.c",
+      "source_location": "L2"
+    },
+    {
+      "id": "test_reg_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\test_reg.c",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_faauto_main_c",
+      "label": "FaAuto_main.c",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L1"
+    },
+    {
+      "id": "faauto_main_interrupt",
+      "label": "__interrupt()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L47"
+    },
+    {
+      "id": "faauto_main_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L56"
+    }
+  ],
+  "edges": [
+    {
+      "source": "display_c",
+      "target": "display",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\display.c",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "display_c",
+      "target": "main",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\display.c",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "display_c",
+      "target": "display_display_process",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\display.c",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "display_h",
+      "target": "xc",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\display.h",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "key_c",
+      "target": "key",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "key_c",
+      "target": "main",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "key_c",
+      "target": "system",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "key_c",
+      "target": "pwm_control",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "key_c",
+      "target": "key_key_scan",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "key_c",
+      "target": "key_key_process",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "key_key_process",
+      "target": "key_key_scan",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "key_h",
+      "target": "xc",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.h",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "main_c",
+      "target": "stdio",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "main_c",
+      "target": "main",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "main_c",
+      "target": "system",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "main_c",
+      "target": "display",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "main_c",
+      "target": "key",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "main_c",
+      "target": "pwm_control",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "main_c",
+      "target": "remote",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "main_c",
+      "target": "main_interrupt",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "main_c",
+      "target": "main_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_c",
+      "target": "pwm_control",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_c",
+      "target": "main",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_c",
+      "target": "system",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_c",
+      "target": "pwm_control_buzzer_pwm_init",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_c",
+      "target": "pwm_control_heater_pwm_init",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_c",
+      "target": "pwm_control_update_heater_pwm",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_c",
+      "target": "pwm_control_buzzer_process",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_c",
+      "target": "pwm_control_heater_feedback_process",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L276",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_heater_feedback_process",
+      "target": "pwm_control_update_heater_pwm",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L305",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_h",
+      "target": "xc",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.h",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "remote_c",
+      "target": "stdio",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "remote_c",
+      "target": "remote",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "remote_c",
+      "target": "main",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "remote_c",
+      "target": "system",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "remote_c",
+      "target": "pwm_control",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "remote_c",
+      "target": "remote_ir_init",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "remote_c",
+      "target": "remote_ir_decode_process",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "remote_c",
+      "target": "remote_ir_process_command",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "remote_h",
+      "target": "xc",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.h",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "system_c",
+      "target": "system",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "system_c",
+      "target": "main",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "system_c",
+      "target": "system_system_init",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "system_c",
+      "target": "system_adc_init",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "system_c",
+      "target": "system_adc_read",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "system_c",
+      "target": "system_uart_init",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "system_c",
+      "target": "system_putch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "system_system_init",
+      "target": "system_adc_init",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.c",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "system_h",
+      "target": "xc",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\system.h",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "test_reg_c",
+      "target": "xc",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\test_reg.c",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "test_reg_c",
+      "target": "test_reg_test",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\test_reg.c",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "test_reg_c",
+      "target": "test_reg_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\test_reg.c",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "xc",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "stdint",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "stdio",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "stdbool",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "ds1307",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "lcd",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "switch",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "lunar",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "remote",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "faauto_main_interrupt",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_faauto_main_c",
+      "target": "faauto_main_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\Docs\\FaAuto_main.c",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "key_key_process",
+      "target": "pwm_control_update_heater_pwm",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\key.c",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "main_interrupt",
+      "target": "remote_ir_decode_process",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "system_system_init",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "pwm_control_heater_pwm_init",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "pwm_control_buzzer_pwm_init",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "system_uart_init",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "remote_ir_init",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "pwm_control_update_heater_pwm",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L141",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "system_adc_read",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L191",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "display_display_process",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L208",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "pwm_control_heater_feedback_process",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L251",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "key_key_process",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L257",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "remote_ir_process_command",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L260",
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "pwm_control_buzzer_process",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\main.c",
+      "source_location": "L263",
+      "weight": 1.0
+    },
+    {
+      "source": "pwm_control_update_heater_pwm",
+      "target": "system_adc_read",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\pwm_control.c",
+      "source_location": "L103",
+      "weight": 1.0
+    },
+    {
+      "source": "remote_ir_process_command",
+      "target": "pwm_control_update_heater_pwm",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "D:\\Work\\Pic\\Model\\DeepHeater\\remote.c",
+      "source_location": "L189",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

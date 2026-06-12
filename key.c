@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "key.h"
 #include "main.h"
 #include "system.h"
@@ -79,6 +80,11 @@ void Key_Process(unsigned char *p_minute, char *p_second, unsigned int *p_tick_m
           key_active[k] = 1;
           key_hold_count[k] = 0;
           key_repeat_count[k] = 0;
+
+          // --- 설정 모드(setting_mode == 1) 시 물리 키 처리 전면 무시 (리모컨 단독 조작 보장) ---
+          if (setting_mode) {
+            continue; // 설정 모드일 때는 아래 일반 모드 로직 수행 안 하고 물리 키 입력을 무시함
+          }
 
           // [최초 1회 실행] 동작 분기: 실제 기능이 작동될 때만 부저 울림
           if (k == 0) { // SW1 (START / STOP) - 항상 부저 울림

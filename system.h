@@ -3,6 +3,10 @@
 
 #include <xc.h>
 
+// 하드웨어 핀 제어 매크로 (V0.9.52 회로 스왑 대응)
+// 70246 단자 오실장으로 인해 기존 RC2 핀이던 FAN을 RA0로 스왑하여 디지털 출력 제어
+#define FAN_LAT   LATAbits.LATA0
+
 // UART 수신(RX) CLI 디버깅용 전역 변수 extern 선언
 extern volatile char rx_cmd;
 extern volatile unsigned char rx_ready;
